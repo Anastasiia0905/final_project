@@ -11,15 +11,54 @@
         <h1>Soud</h1>
     </section>
     <script>
-        let soundContainer = document.querySelector('.sound_container');
-        let requesrURL = '/Users/internic/final_project/JSON/file.json';
+       /* let soundContainer = document.querySelector('.sound_container');
+        let requesrURL = 'JSON/file.json';
 
         let request = new XMLHttpRequest();
         request.open('GET', requesrURL);
         request.responseType = 'json';
         request.send();
-       // console.log(request.response);
 
+       console.log(request.response);
+
+*/
+let requesrURL = 'JSON/file.json';
+       async function doAjaxThings() {
+        // await code here
+        let result = await makeRequest("GET", requesrURL);
+        // code below here will only execute when await makeRequest() finished loading
+        console.log(result);
+}
+document.addEventListener("DOMContentLoaded", function () {
+    doAjaxThings();
+    // create and manipulate your DOM here. doAjaxThings() will run asynchronously and not block your DOM rendering
+    //document.createElement("div");
+
+    //document.getElementById("...").addEventListener(...);
+});
+function makeRequest(method, url) {
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(xhr.response);
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            }
+        };
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send();
+    });
+}
        
     </script>
 
