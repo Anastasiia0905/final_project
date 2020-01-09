@@ -7,8 +7,21 @@
     <title>Main</title>
 </head>
 <body>
-    <section class='qww'>
-        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores id minus eius, laboriosam deserunt nihil dolorum, explicabo modi, eaque nobis omnis magnam veritatis quaerat exercitationem nisi? Harum iste cumque ullam sit magni quae, dignissimos quasi culpa, natus velit at. Inventore, explicabo deserunt? Eveniet, saepe. Ipsum ipsa ipsam, corporis tempora consectetur alias odit minima delectus similique amet facilis eius quos praesentium exercitationem harum modi. Neque obcaecati soluta dignissimos repudiandae quasi? Dolorem inventore sed quas quam officia deserunt hic non, dignissimos illum, reiciendis libero culpa facere, ipsam fuga itaque earum deleniti! Ex dolor ab fugit laudantium reprehenderit eum ad quas possimus nisi.</p>
+    <section class='sound_container'>
+        <h1>Soud</h1>
     </section>
+    <script>
+        let soundContainer = document.querySelector('.sound_container');
+        let requesrURL = '/Users/internic/final_project/JSON/file.json';
+
+        let request = new XMLHttpRequest();
+        request.open('GET', requesrURL);
+        request.responseType = 'json';
+        request.send();
+       // console.log(request.response);
+
+       
+    </script>
+
 </body>
 </html>
