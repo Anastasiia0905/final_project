@@ -1,0 +1,57 @@
+.nav__toggle {
+    cursor: pointer;
+    height: 2rem;
+    right: 2rem;
+    position: absolute;
+    top: 1rem;
+    width: 2rem;
+    z-index: 2;
+    display: none;
+    &_burger, 
+    &_burger:before,
+    &_burger:after {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: white;
+        content: '';
+        height: 0.15rem;
+        width: 100%;
+        transition: all 0.5s ease;
+
+    }
+    &_burger:before {
+        margin-top: -0.5rem;
+    }
+    &_burger:after {
+        margin-top: 0.5rem;
+    }
+    &_burger:hover {
+        opacity: 0.8;
+    }
+   &:hover &_burger:before {
+        margin-top: -0.8rem;
+    }
+    &:hover &_burger:after {
+        margin-top: 0.8rem;
+    }
+    &.active &_burger {
+        background: transparent;
+    }
+    &.active &_burger:before,
+    &.active &_burger:after {
+        margin-top: 0;
+    }
+    &.active &_burger:before {
+        transform: rotate(-45deg);
+    }
+    &.active &_burger:after {
+        transform: rotate(45deg);
+    }
+
+}
+@media screen and (max-width: 786px){
+    .nav__toggle {
+        display: block;
+    }
+}

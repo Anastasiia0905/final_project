@@ -1,0 +1,8 @@
+.container {
+    overflow: hidden;
+    &_slider {
+        //position: absolute;
+        width: 100vw;
+        height: 90vh;
+    }
+}

@@ -1,0 +1,33 @@
+.sliders__control {
+    cursor: pointer;
+    &_list {
+        color: #fff;
+        display: flex;
+        justify-content: space-around;
+        li {
+            display: inline-block;
+            height: 14px;
+            width: 14px;
+            border: 2px solid #fff;
+            background-color: transparent;
+            transition: all 0.4s ease-in-out;
+        }
+        li:hover {
+            height: 16px;
+            width: 16px;
+        }
+        li.prev, li.next {
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+        }
+        .prev {
+            transform: rotate(135deg);
+        }
+        .next {
+            transform: rotate(-45deg);
+        }
+        li.current {
+            background-color: #fff;
+        }
+    }
+}

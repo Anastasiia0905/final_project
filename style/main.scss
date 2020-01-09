@@ -1,0 +1,59 @@
+// сборщик всех стилей, переменных, типографии, базовые стили элементов
+// отдельно все элементы + в элемент собираются другоие элементы
+
+
+@import 'block/container';
+@import 'block/nav';
+@import 'block/submenu';
+@import 'block/burger';
+@import 'block/slider';
+@import 'block/sliderControls';
+
+@import 'block/verticalMenu';
+
+body {
+    background-color: #000;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: sans-serif;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+// позиционирование и отступы блоков
+.nav__wrap {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    min-height: 8vh;
+}
+.sliders__control {
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    bottom: 0;
+}
+/// temporary style
+main {
+    display: flex;
+    height: 95vh;
+    background-color: #fff;
+    //box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #a2a9b1;
+}
+.vertical__wrap {
+    overflow: auto;
+    min-width: 20vw;
+    background-color: #fbfbfb;
+
+}
+.qww {
+    color: #000;
+}
