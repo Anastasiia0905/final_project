@@ -1,0 +1,32 @@
+.content .sound {  //подровнять
+    //overflow: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    h1 {
+        text-transform: uppercase;
+    }}
+.content__item {
+      line-height: 60px;
+      border-bottom: 1px solid #8b92a0;
+      padding-left: 20px;
+      cursor: pointer;
+      span {
+          display: inline-block;
+          width: 30%;
+      }
+      span:first-child {
+          width: 40%;
+      }
+      span:first-child::before {
+          content: " ";
+          display: inline-block;
+          background-image: url('/content/img/icon/play.svg');
+          width: 16px;
+          height: 16px;
+          
+      }
+      audio {
+          //display: none; //довавить возпроизвидение 
+      }
+    }
