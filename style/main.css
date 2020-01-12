@@ -474,7 +474,6 @@
       -ms-flex-align: center;
           align-items: center;
   height: 110vw;
-  overflow: auto;
 }
 
 .photoContent figure {

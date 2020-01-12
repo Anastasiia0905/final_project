@@ -18,10 +18,10 @@ linkContent.addEventListener('click', (e)=> {
 
 async function asyncRequest(target, parseFunc){  
     let objFile = await makeRequest('GET', target);
-    
     let jsonObj = JSON.parse(objFile);
     console.log(jsonObj);
     parseFunc(jsonObj);
+    setToLocal(objFile);
 }
 
 function makeRequest(method, url){ //функция, которая делает запрос на сервер. Ожидаем ответ
@@ -55,6 +55,10 @@ function showSound(obj){
     let headline = document.createElement('h1');
     headline.textContent = obj[0].type;
     divContent.appendChild(headline);
+
+    let searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    divContent.appendChild(searchInput);
     
     for(let i = 0; i < obj.length; i++){
          let holder = document.createElement('div');
@@ -79,18 +83,21 @@ function showSound(obj){
 
          divContent.appendChild(holder);
 
-         divContent.classList.add('sound');
-         holder.classList.add('content__item');
+         //divContent.classList.add('sound');
+         //holder.classList.add('content__item');
     }
+    divContent.classList.add('sound');
+    divContent.classList.remove('photoContent');
+    searchInput.addEventListener('input', function() {
+        let val = this.value.trim();
+        let items = localStorage.getItem('content');
+       console.log(items)
+    })
 }
 function showPhoto(obj){
         while(divContent.firstChild){
             divContent.removeChild(divContent.firstChild);
         }
-        let headline = document.createElement('h1');
-        headline.textContent = obj[0].type;
-        divContent.appendChild(headline);
-
         for(let i = 0; i < obj.length; i++){
             let figure = document.createElement('figure');
             let img = document.createElement('img');
@@ -102,7 +109,28 @@ function showPhoto(obj){
             figure.appendChild(img);
             divContent.appendChild(figure);
         }
-
+        divContent.classList.add('photoContent');
+        divContent.classList.remove('sound');
+}
+function setToLocal(obj) {
+    localStorage.setItem('content', obj);
+    console.log(localStorage.getItem('content'));
 }
 
-
+function searchItem(el){
+    let val = this.value.trim();
+    let items = el;
+    if(value != ''){
+        items.forEach((item)=> {
+            if(item.innerText.seach(val) == -1){
+                item.style.display = 'none';
+            } else {
+                item.style.display = ''
+            }
+        })
+    } else {
+        items.forEach((item) => {
+            item.style.display = ''
+        })
+    }
+}
