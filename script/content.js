@@ -3,9 +3,9 @@
 const linkContent = document.querySelector('.vertical__menu'); 
 const divContent = document.querySelector('.content'); 
 
-const cleanContentDiv = () => {  
-    while(divContent.firstChild){  
-        divContent.removeChild(divContent.firstChild); 
+const cleanDiv = (div) => {  
+    while(div.firstChild){  
+        div.removeChild(div.firstChild); 
     }
 }
 
@@ -46,124 +46,118 @@ const photoCreate = (alt, url,category) => {
 
         return figureItem;
 }
-async function asyncRequest(target, parseFunc){
+async function getData(target){
     let response = await fetch(target);
     let data  = await response.json();
     return data;
 };
+const setToLocal = (data)=> {
+    localStorage.clear();
+    localStorage.setItem('items', JSON.stringify(data))
+    let contentArr = JSON.parse(localStorage.getItem('items'));
+    return contentArr;
+}
 
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
     target = e.target.parentElement.dataset.target; 
     targetURL = `JSON/${target}.json`;
-    
+
     if(target === 'sound'){
-        asyncRequest(targetURL, soundRender)
+        getData(targetURL)
             .then(data => soundRender(data))
     }
     else if(target === 'photo'){
-        asyncRequest(targetURL, photoRender)
+       
+        getData(targetURL)
             .then(data => photoRender(data))
     }
     
 });
 
-// функция, которая собирает файл с картинками
-// функиця, которая отрисовует картинки
+
+
+
 // функция, которая прорисовует необходимый контент
 // функция, которая открывает модальное окно для выбраного элемента
+// обработка ошибок, catch
+// прогонка через babel  !!! fetch не поддерживает
+// оптимизировать создание формы
+// фильтровать с localStarage?
+// фильтрацию сделать асинхронной
+//
 
 
 
 
-const soundRender = (obj) => {
-    cleanContentDiv();
 
-    obj.forEach(element => {
-        divContent.appendChild(
-            soundCreate(element.name, element.artist, element.genre, element.url)
-        );
-    });
-}
+const soundRender = (data) => {
+    cleanDiv(divContent);
+    const filterForm = document.createElement('form');
+    const selectForm = document.createElement('select');
+    const blues = document.createElement('option');
+    const latina = document.createElement('option');
+    const holiday = document.createElement('option');
+    const classic = document.createElement('option');
+    const all = document.createElement('option');
+    all.textContent = 'all'
+    blues.textContent = 'blues';
+    latina.textContent = 'latina';
+    holiday.textContent = 'holiday';
+    classic.textContent = 'classic'
 
-const photoRender = (obj)=> {
-    cleanContentDiv();
-
-    obj.forEach((element) => {
-        divContent.appendChild(photoCreate(element.alt, element.url, element.category))
-    });
-        divContent.classList.add('photoContent');
-        divContent.classList.remove('sound');
-}
-
-
-
-function setToLocal(obj) {
-    localStorage.setItem('content', obj);
-}
-
-
-/*async function asyncRequest(target, parseFunc){  
-    let objFile = await makeRequest('GET', target);
+    selectForm.appendChild(all)
+    selectForm.appendChild(blues)
+    selectForm.appendChild(latina)
+    selectForm.appendChild(holiday)
+    selectForm.appendChild(classic)
     
-    console.log(objFile.status);
-    let jsonObj = JSON.parse(objFile);
-    parseFunc(jsonObj);
-    setToLocal(objFile);
-}*/
+   
+    filterForm.appendChild(selectForm);
+    divContent.appendChild(filterForm);
 
-/*function makeRequest(method, url){ //функция, которая делает запрос на сервер. Ожидаем ответ
-    return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.onload = ()=>{
-            if(this.status < 300){
-                resolve(xhr.response);
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                })
-            }
+
+    let contentWrapper = document.createElement('div');
+    
+    let obj = setToLocal(data);
+    const render = (obj)=> {
+        cleanDiv(contentWrapper);
+        obj.forEach((element) => {
+            contentWrapper.appendChild(
+                soundCreate(element.name, element.artist, element.genre, element.url)
+            );
+        });
+        divContent.appendChild(contentWrapper);
+    }
+    divContent.addEventListener('onload', render(obj));
+    selectForm.addEventListener('change', e => {
+        const filterParam = e.target.value;
+        let qq = obj.filter(item => item.genre == filterParam);
+        render(qq);
+        if(filterParam == 'all'){
+            render(obj)
         }
-        xhr.onerror = ()=> {
-            reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-            }) 
-        }
-        xhr.send();
-    })
-}*/
+    });
+   
 
-/* for(let i = 0; i < obj.length; i++){
-         let holder = document.createElement('div');
-         let name = document.createElement('span');
-         let artist = document.createElement('span');
-         let genre = document.createElement('span');
+};
 
-         let audio = document.createElement('audio');
-         Object.assign(audio, {
-             controls: 'controls',
-             src: obj[i].url,
-             type: 'audio.wav'
-         })
-         /*audio.controls = 'controls';
-         audio.src = obj[i].url;
-         audio.type = 'audio.wav';*/
+const photoRender = (data)=> {
+    cleanDiv(divContent);
+    let contentWrapper = document.createElement('div');
+    let obj = setToLocal(data);
 
-       /*  name.textContent = obj[i].name;
-         artist.textContent = obj[i].artist;
-         genre.textContent = obj[i].genre;
-        
+    const render = (obj)=> {
+        cleanDiv(contentWrapper);
+        obj.forEach((element) => {
+            contentWrapper.appendChild(photoCreate(element.alt, element.url, element.category));
+        });
+        divContent.appendChild(contentWrapper);
+    }
+    render(obj)
+   
+}
 
-         holder.appendChild(name);
-         holder.appendChild(artist);
-         holder.appendChild(genre);
-         holder.appendChild(audio);*/
 
-        // divContent.appendChild(holder);
 
-         //divContent.classList.add('sound');
-         //holder.classList.add('content__item');
-        //}
+
