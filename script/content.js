@@ -85,7 +85,8 @@ linkContent.addEventListener('click', (e)=> {
 // оптимизировать создание формы
 // фильтровать с localStarage?
 // фильтрацию сделать асинхронной
-//
+//довавить спинер
+
 
 
 
@@ -94,12 +95,15 @@ linkContent.addEventListener('click', (e)=> {
 const soundRender = (data) => {
     cleanDiv(divContent);
     const filterForm = document.createElement('form');
+    const inputForm = document.createElement('input');
     const selectForm = document.createElement('select');
     const blues = document.createElement('option');
     const latina = document.createElement('option');
     const holiday = document.createElement('option');
     const classic = document.createElement('option');
     const all = document.createElement('option');
+
+
     all.textContent = 'all'
     blues.textContent = 'blues';
     latina.textContent = 'latina';
@@ -112,7 +116,7 @@ const soundRender = (data) => {
     selectForm.appendChild(holiday)
     selectForm.appendChild(classic)
     
-   
+    filterForm.appendChild(inputForm);
     filterForm.appendChild(selectForm);
     divContent.appendChild(filterForm);
 
@@ -132,13 +136,29 @@ const soundRender = (data) => {
     divContent.addEventListener('onload', render(obj));
     selectForm.addEventListener('change', e => {
         const filterParam = e.target.value;
-        let qq = obj.filter(item => item.genre == filterParam);
-        render(qq);
+        let selected = obj.filter(item => item.genre == filterParam);
+        render(selected);
         if(filterParam == 'all'){
             render(obj)
         }
     });
-   
+
+
+    const findMatch = (word, obj)=>{
+      return  obj.filter(item => {
+            const regex = new RegExp(word, 'gi');
+            return item.artist.match(regex) || item.name.match(regex);
+        })
+        
+    }
+    const displayMatch = (value)=> {
+        return findMatch(value, obj);
+        
+    }
+    inputForm.addEventListener('keyup', (e) => {
+       let res = inputForm.value;
+        render(displayMatch(res));
+    })
 
 };
 
