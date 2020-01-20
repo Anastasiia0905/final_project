@@ -31,6 +31,9 @@ ul {
     margin: 0;
 }
 // позиционирование и отступы блоков
+.button {
+    cursor: pointer;
+}
 .nav__wrap {
     display: flex;
     align-items: center;
