@@ -1,0 +1,40 @@
+.vertical__menu {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 100%;
+    &_item {
+        margin-bottom: 25px;
+        width: 100%;
+        position: relative;
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 0;
+            height: 26px;
+            color: $nav-color;
+        }
+        img {
+            height: inherit;
+            margin: 0 20px;
+        }
+      
+    }
+    &_item:hover {
+        background-color: $nav-bgcolor-highlight;
+        a {
+            color: $nav-color-hightlight;
+        }
+    }
+    &_item:hover:after {
+        content: "";
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        background-color: $nav-color-hightlight;
+        left: 0;
+        top: 0;
+    }
+    
+}

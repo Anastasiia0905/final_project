@@ -1,7 +1,9 @@
 .submenu {
     position: relative;
+    overflow: visible;
     &__item {
         position: absolute;
+        
         left: -9999px;
         padding: 0;
         opacity: 0;
@@ -13,17 +15,12 @@
             margin: 15px 20px;
         }
         a {
-            color: #fff;
+            color: $main-text-color;
             margin: 5px;
         }
-        a:hover {
-            color: #ed4a09;
-        }
+        
     }
-    &:hover > a, 
-    &:active > a  {
-        color: #ed4a09;
-    }
+   
     &:hover .submenu__item {
         z-index: 3;
         left: 0;

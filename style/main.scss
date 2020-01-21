@@ -1,6 +1,6 @@
 // сборщик всех стилей, переменных, типографии, базовые стили элементов
 // отдельно все элементы + в элемент собираются другоие элементы
-
+@import 'var/color';
 
 @import 'block/container';
 @import 'block/nav';
@@ -9,9 +9,10 @@
 @import 'block/slider';
 @import 'block/sliderControls';
 
-@import 'block/verticalMenu';
+@import 'block/asideMenu';
 @import 'block/content';
-@import 'block/contentPhoto';
+@import 'block/content/imgSection';
+@import 'block/content//lightbox';
 
 body {
     background-color: #000;
@@ -30,6 +31,7 @@ ul {
     padding: 0;
     margin: 0;
 }
+
 // позиционирование и отступы блоков
 .button {
     cursor: pointer;
@@ -41,10 +43,7 @@ ul {
     min-height: 8vh;
 }
 .sliders__control {
-    position: absolute;
-    width: 30%;
-    height: 10%;
-    bottom: 0;
+    
 }
 /// temporary style
 main {
@@ -65,5 +64,5 @@ main {
 .content {
     color: #000;
     padding: 15px;
-    box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #a2a9b1;
+    box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #b08be0;
 }

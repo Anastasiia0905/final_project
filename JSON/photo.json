@@ -1,12 +1,6 @@
 [
     {
         "type" : "photo",
-        "url" : "content/photo/alley-4730262_640.jpg",
-        "category" : "city",
-        "alt" : "alley"
-    },
-    {
-        "type" : "photo",
         "url" : "content/photo/aurora-1197753_640.jpg",
         "category" : "winter",
         "alt" : "aurora"

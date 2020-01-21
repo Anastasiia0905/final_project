@@ -1,0 +1,13 @@
+.img-section__wrap {
+    display: grid;
+    grid-template-rows: 300px;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-gap: 15px;
+    figure {
+        img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+}

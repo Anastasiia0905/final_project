@@ -2,13 +2,25 @@
 
 const linkContent = document.querySelector('.vertical__menu'); 
 const divContent = document.querySelector('.content'); 
+const contentWrapper = document.createElement('div');
+
 
 const cleanDiv = (div) => {  
     while(div.firstChild){  
         div.removeChild(div.firstChild); 
     }
 }
-
+async function getData(target){
+    let response = await fetch(target);
+    let data  = await response.json();
+    return data;
+};
+const setToLocal = (data)=> {
+    localStorage.removeItem('items');
+    localStorage.setItem('items', JSON.stringify(data))
+    let contentArr = JSON.parse(localStorage.getItem('items'));
+    return contentArr;
+}
 
 const soundCreate = (name, artist, genre, url, id) => {
         let holder = document.createElement('div');
@@ -57,17 +69,7 @@ const photoCreate = (alt, url,category) => {
 
         return figureItem;
 }
-async function getData(target){
-    let response = await fetch(target);
-    let data  = await response.json();
-    return data;
-};
-const setToLocal = (data)=> {
-    localStorage.removeItem('items');
-    localStorage.setItem('items', JSON.stringify(data))
-    let contentArr = JSON.parse(localStorage.getItem('items'));
-    return contentArr;
-}
+
 
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -137,7 +139,7 @@ const soundRender = (data) => {
     
   
     //__________MAIN CONTENT_____________
-    let contentWrapper = document.createElement('div');
+   
     
     //___________SAVE DATA TO LOCAL STORE___________
     let obj = setToLocal(data);
@@ -265,18 +267,38 @@ divContent.addEventListener('onload', pagination(obj));
 
 const photoRender = (data)=> {
     cleanDiv(divContent);   
-    let contentWrapper = document.createElement('div');
     let obj = setToLocal(data);
-
     const render = (obj)=> {
         cleanDiv(contentWrapper);
         obj.forEach((element) => {
             contentWrapper.appendChild(photoCreate(element.alt, element.url, element.category));
         });
         divContent.appendChild(contentWrapper);
+        contentWrapper.classList.add('img-section__wrap')
     }
+    
     render(obj)
-   
+    const lightbox = document.createElement('div');
+    lightbox.classList.add('lightbox');
+    divContent.appendChild(lightbox);
+
+    contentWrapper.addEventListener('click', (e) => {
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        const img = document.createElement('img');
+        img.src = e.target.src;
+        while(lightbox.firstChild){
+            lightbox.removeChild(lightbox.firstChild);
+        }
+        lightbox.appendChild(img);
+        
+    });
+    lightbox.addEventListener('click', (e)=> {
+        if(e.target !== e.currentTarget) return;
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    })
+    
 }
 
 

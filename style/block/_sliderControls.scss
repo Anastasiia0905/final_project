@@ -1,14 +1,18 @@
 .sliders__control {
     cursor: pointer;
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    bottom: 0;
     &_list {
-        color: #fff;
+        color: $main-text-color;
         display: flex;
         justify-content: space-around;
         li {
             display: inline-block;
             height: 14px;
             width: 14px;
-            border: 2px solid #fff;
+            border: 2px solid $main-text-color;
             background-color: transparent;
             transition: all 0.4s ease-in-out;
         }
@@ -17,7 +21,7 @@
             width: 16px;
         }
         li.prev, li.next {
-            border: solid #fff;
+            border: solid $main-text-color;
             border-width: 0 2px 2px 0;
         }
         .prev {
@@ -27,7 +31,12 @@
             transform: rotate(-45deg);
         }
         li.current {
-            background-color: #fff;
+            background-color: $main-text-color;
         }
+    }
+}
+@media screen and (max-width: 728px) {
+    .sliders__control {
+        width: 100%;
     }
 }

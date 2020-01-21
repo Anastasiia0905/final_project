@@ -1,5 +1,11 @@
+.container {
+    //overflow: auto;
+    &_slider {
+        width: 100vw;
+        height: 98vh;
+    }
+}
 .sliders {
-    position: relative;
     width: 100%;
     height: 100%;
     &__item {
@@ -17,7 +23,7 @@
                 position: absolute;
 				z-index: 1;
 				width: 100%;
-				height: 100%;
+				height: 90%;
 				object-fit: cover;
 				transition: transform 1s ease-in-out;
             }

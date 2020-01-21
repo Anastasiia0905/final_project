@@ -1,8 +1,7 @@
 .container {
     overflow: auto;
     &_slider {
-        //position: absolute;
         width: 100vw;
-        height: 90vh;
+        height: 100vh;
     }
 }
