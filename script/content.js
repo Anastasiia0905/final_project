@@ -90,7 +90,7 @@ linkContent.addEventListener('click', (e)=> {
 
 
 
-
+//!!!!!!!СТРУКТУРИРОВАТЬ КОД!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // функция, которая прорисовует необходимый контент
 // функция, которая открывает модальное окно для выбраного элемента
 // обработка ошибок, catch
@@ -102,9 +102,11 @@ linkContent.addEventListener('click', (e)=> {
 //довавить спинер
 // много уровневая фильтрация
 // пагинация, когда страница стает большая
+// решить проблему с лайками
 
 const soundRender = (data) => {
     cleanDiv(divContent);
+    
     //______________FILTER + FORM_______________
     const filterForm = document.createElement('form');
     const inputForm = document.createElement('input');
@@ -115,31 +117,44 @@ const soundRender = (data) => {
     const classic = document.createElement('option');
     const all = document.createElement('option');
     const likeForm = document.createElement('input');
+    const likeLabel = document.createElement('label');
 
 
-    all.textContent = 'all'
+    all.textContent = 'any genre'
     blues.textContent = 'blues';
     latina.textContent = 'latina';
     holiday.textContent = 'holiday';
     classic.textContent = 'classic';
+    likeLabel.textContent = 'select you favorite music'
 
-    likeForm.setAttribute('type', 'checkbox');
+
+    inputForm.type = 'text';
+    likeForm.type = 'checkbox';
+    likeForm.id = 'likeForm'
+    likeLabel.setAttribute('for', 'likeForm');
 
     selectForm.appendChild(all)
     selectForm.appendChild(blues)
     selectForm.appendChild(latina)
     selectForm.appendChild(holiday)
     selectForm.appendChild(classic)
-    
+    likeLabel.appendChild(likeForm);
+
     filterForm.appendChild(inputForm);
     filterForm.appendChild(selectForm);
     filterForm.appendChild(likeForm);
+    filterForm.appendChild(likeLabel);
+    
     divContent.appendChild(filterForm);
+
+
+    filterForm.classList.add('sound__form');
+
 
     
   
-    //__________MAIN CONTENT_____________
-   
+    //____________play like button_____________
+
     
     //___________SAVE DATA TO LOCAL STORE___________
     let obj = setToLocal(data);
@@ -155,7 +170,6 @@ const soundRender = (data) => {
                 soundCreate(element.name, element.artist, element.genre, element.url, element.id)
                 );
             });
-            contentWrapper.classList.add('sound__wrap');
         }
         divContent.appendChild(contentWrapper);
         
@@ -195,9 +209,13 @@ const soundRender = (data) => {
 
     contentWrapper.addEventListener('click', (e)=> {
         if(e.target.classList.contains('button-like')){
+            e.target.classList.toggle('active')
             toggleLikeSound(e.target.id);
             console.log(likedSound);
         } 
+        else if(e.target.classList.contains('button-play')){
+            console.log(e.target);
+        }
     });
 
     
@@ -240,7 +258,7 @@ const soundRender = (data) => {
     if(pagWrap.hasChildNodes(ul)){
         pagWrap.innerHTML = ''; 
     }
-    let onPage = 4;
+    let onPage = 5;
     let countOfPage = Math.ceil(obj.length / onPage);
     for(let i = 1; i <= countOfPage; i++){
         let li = document.createElement('li');
@@ -259,6 +277,8 @@ const soundRender = (data) => {
     });
 }
 
+contentWrapper.classList.remove('img-section__wrap');
+contentWrapper.classList.add('sound__wrap');
 divContent.addEventListener('onload', pagination(obj));
 };
 
@@ -286,7 +306,8 @@ const photoRender = (data)=> {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
         const img = document.createElement('img');
-        img.src = e.target.src;
+        if(!e.target.src)return;
+        else {img.src = e.target.src;}
         while(lightbox.firstChild){
             lightbox.removeChild(lightbox.firstChild);
         }

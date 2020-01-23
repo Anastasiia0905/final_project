@@ -4,23 +4,7 @@
     position: relative;
 }
 
-.sound{
-    &__item {
-        margin: 5px 10px;
-        display: grid;
-        grid-template-columns: 25px 25px 1fr 1fr 0.5fr;
-        grid-gap: 20px;
-        audio {
-            display: none;
-        }
-    }
-}
-.button-play{
-    background: url('/content/img/icon/play.svg') no-repeat center center;
-}
-.button-like {
-    background: url('/content/img/icon/heart.svg') no-repeat center center;
-}
+
 /*.content .sound {  //подровнять
     //overflow: auto;
     display: flex;
