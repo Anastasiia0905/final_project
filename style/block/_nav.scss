@@ -1,24 +1,29 @@
+
 .nav__list {
-    display: flex;
     position: absolute;
     z-index: 3;
+    left: 0;
+    display: flex;
     width: 100%;
+    padding-left: 10%;
     background-color: inherit;
-    justify-content: space-around;
-    margin: 0;
+    justify-content: center;
+    &_item {
+        flex-grow: 1;
+    }
     &_item:after {
-        content: '';
         width: 2px;
         height: 100%;
+        padding-left: calc(50%);
+        content: '';
         border-right: 2px solid $main-text-color;
-        padding-left: 100px;
     }
     &_item:last-child::after {
         border-right: none;
     }
     a {
         font-size: 20px;
-        color: #fff;
+        color: $main-text-color;
         
     }
     a:hover {
@@ -28,20 +33,20 @@
 @media screen and (max-width: 728px){
     .nav__list {
         position: absolute;
-        z-index: 2;
+        z-index: 4;
         right: 0px;
-        height: 92vh;
+        height: 100vh;
         top: 8vh;
         width: 40%;
-        background-color: #000;
+        background-color: rgba(0,0,0, 0.8);
         display: flex;
         flex-direction: column;
         align-items: center;
-        transform: translateX(100%);
+        transform: translateX(-100%);
         transition: transform 0.5s ease-in;
         &_item {
             opacity: 0;
-            align-self: flex-start;
+            align-self: baseline;
         }
         &_item:after {
             display: none;
@@ -49,6 +54,7 @@
     }
     .nav__list.active {
         transform: translateX(0%);
+        width: 100%;
     }
     @keyframes navSliderFade {
         from {

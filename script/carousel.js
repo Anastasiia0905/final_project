@@ -3,7 +3,7 @@ let sliders, currentSlide, nextSlide, currentIndex, nextIndex, currentSelector, 
 const circle = index => {
 	
 	nextIndex = index !== undefined ? index : nextIndex;
-	console.log(nextIndex);
+	
 	currentSlide = sliders[currentIndex];
 	nextSlide = sliders[nextIndex];	
 	currentSelector = selectors[currentIndex];

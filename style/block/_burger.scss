@@ -1,10 +1,10 @@
 .nav__toggle {
     cursor: pointer;
-    height: 2rem;
-    right: 2rem;
+    height: 2em;
+    right: 2em;
     position: absolute;
-    top: 1rem;
-    width: 2rem;
+    top: 1em;
+    width: 2em;
     z-index: 2;
     display: none;
     &_burger, 
@@ -13,7 +13,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: white;
+        background: $main-text-color;
         content: '';
         height: 0.15rem;
         width: 100%;
@@ -50,7 +50,7 @@
     }
 
 }
-@media screen and (max-width: 786px){
+@media screen and (max-width: 728px){
     .nav__toggle {
         display: block;
     }

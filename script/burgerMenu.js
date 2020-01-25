@@ -7,14 +7,14 @@ const navSlide = () => {
         
         navMenu.classList.toggle('active');
         burger.classList.toggle('active');
-
+       
         navMenuItem.forEach((item, index)=> {
             if(item.style.animation){
                 item.style.animation = '';
             } else {
                 item.style.animation = `navSliderFade 0.5s ease forwards ${index / 5 + 1}s`;
             }
-        })
+        });
     });
     
 
