@@ -1,5 +1,7 @@
 .nav__list {
     display: flex;
+    position: absolute;
+    z-index: 3;
     width: 100%;
     background-color: inherit;
     justify-content: space-around;

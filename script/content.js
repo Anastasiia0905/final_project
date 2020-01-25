@@ -15,10 +15,10 @@ async function getData(target){
     let data  = await response.json();
     return data;
 };
-const setToLocal = (data)=> {
-    localStorage.removeItem('items');
-    localStorage.setItem('items', JSON.stringify(data))
-    let contentArr = JSON.parse(localStorage.getItem('items'));
+const setToLocal = (data, type)=> {
+    localStorage.removeItem(`${type}`);
+    localStorage.setItem(`${type}`, JSON.stringify(data))
+    let contentArr = JSON.parse(localStorage.getItem(`${type}`));
     return contentArr;
 }
 
@@ -69,7 +69,23 @@ const photoCreate = (alt, url,category) => {
 
         return figureItem;
 }
-
+const videoCreate = (url, duration) => {
+    let video = document.createElement('video');
+    video.src = url;
+    video.dataset.duration = duration;
+    video.setAttribute('controls', true)
+    return video;
+    
+}
+async function filterFunc (e, obj, genre){
+    const filterParam = e.target.value;
+    console.log(filterParam);
+    let selected = await obj.filter(item => item.genre == filterParam);
+    if(selected == ''){return obj}
+    else {
+        return selected;
+    }   
+}
 
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -79,9 +95,10 @@ linkContent.addEventListener('click', (e)=> {
     if(target === 'sound'){
         getData(targetURL)
             .then(data => soundRender(data))
-    }
-    else if(target === 'photo'){
-       
+    } else if(target === 'video'){
+        getData(targetURL)
+            .then(data => videoRender(data))
+    } else if(target === 'photo'){
         getData(targetURL)
             .then(data => photoRender(data))
     }
@@ -103,6 +120,25 @@ linkContent.addEventListener('click', (e)=> {
 // много уровневая фильтрация
 // пагинация, когда страница стает большая
 // решить проблему с лайками
+const videoRender = (data) => {
+    cleanDiv(divContent);
+    let obj = setToLocal(data, 'video');
+    const render = (obj) => {
+        cleanDiv(contentWrapper);
+        obj.forEach((element) => {                
+            contentWrapper.appendChild(
+                videoCreate(element.url, element.duration)
+                );
+            });
+            divContent.appendChild(contentWrapper)
+    }
+
+contentWrapper.classList.remove('img-section__wrap');
+contentWrapper.classList.remove('sound__wrap');
+contentWrapper.classList.add('video__wrap');
+divContent.addEventListener('onload', render(obj))
+}
+
 
 const soundRender = (data) => {
     cleanDiv(divContent);
@@ -157,7 +193,7 @@ const soundRender = (data) => {
 
     
     //___________SAVE DATA TO LOCAL STORE___________
-    let obj = setToLocal(data);
+    let obj = setToLocal(data, 'sound');
 
     //____________RENDER CONTENT__________________
     const render = (obj)=> {
@@ -219,16 +255,6 @@ const soundRender = (data) => {
     });
 
     
-    //_____________FILTER SELECT__________________
-    selectForm.addEventListener('change', e => {
-        const filterParam = e.target.value;
-        let selected = obj.filter(item => item.genre == filterParam);
-        pagination(selected);
-        if(filterParam == 'all'){
-            pagination(obj)
-        }
-    });
-
     //______________FILTER INPUT______________
     const findMatch = (word, obj)=>{
       return obj.filter(item => {
@@ -276,11 +302,18 @@ const soundRender = (data) => {
         render(note);
     });
 }
-
+contentWrapper.classList.remove('video__wrap');
 contentWrapper.classList.remove('img-section__wrap');
 contentWrapper.classList.add('sound__wrap');
 divContent.addEventListener('onload', pagination(obj));
-};
+
+selectForm.addEventListener('change', (e)=> {
+    filterFunc(e, obj)
+        .then(selected => pagination(selected))
+        .then(pagination(obj))
+});
+}
+   
 
 
 
@@ -319,7 +352,8 @@ const photoRender = (data)=> {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     })
-    
+contentWrapper.classList.remove('video__wrap');
+contentWrapper.classList.remove('sound__wrap');
 }
 
 

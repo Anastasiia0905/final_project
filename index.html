@@ -10,8 +10,8 @@
 </head>
 <body>
     <header id="home">
-        <div class="container container_slider">
-            <nav class="nav__wrap">
+        <div class="container_slider">
+            <nav class="nav__wrap container">
                 <div class="nav__toggle">
                     <div class="nav__toggle_burger">
                     </div>
@@ -25,54 +25,60 @@
                             <li><a href="#content">Image</a></li>
                         </ul>
                     </li>
-                    <li class="nav__list_item submenu"><a href="#gallery">Gallery</a>
+                    <li class="nav__list_item submenu"><a href="#contact">Contact</a>
                         <ul class="submenu__item">
-                            <li><a href="#">Gallery1</a></li>
-                            <li><a href="#">Gallery1</a></li>
-                            <li><a href="#">Gallery1</a></li>
-                            <li><a href="#">Gallery1</a></li>
+                            <li><a href="#contact">Write Us</a></li>
+                            <li><a href="#contact">Search Us</a></li>
                         </ul>
                     </li>
-                    <li class="nav__list_item"><a href="#contact">Contact</a></li>
+                    <li class="nav__list_item"><a href="#footer">About Us</a></li>
                 </ul>
             </nav>
             <div class="sliders">
                 <div class="sliders__item">
-                    <div class="sliders__item_part sliders__item_left">       
+                    <div class="sliders__item_part sliders__item_left">  
+                        <h1>CONTENT</h1>     
                         <img src="content/img/imgSlider /canyon-1-left.jpg"                
                             alt="canyon-1">
                     </div>
                     <div class="sliders__item_part sliders__item_right">
+                        <h1>Library</h1>
                         <img src="content/img/imgSlider /canyon-1-right.jpg" 
                             alt="canyon-1">
                     </div>
                 </div>
                 <div class="sliders__item">
-                    <div class="sliders__item_part sliders__item_left">      
+                    <div class="sliders__item_part sliders__item_left">
+                        <h1>CONTENT</h1>       
                         <img src="content/img/imgSlider /canyon-2-left.jpg"                
                             alt="canyon-1">
                     </div>
                     <div class="sliders__item_part sliders__item_right">
+                        <h1>Library</h1>
                         <img src="content/img/imgSlider /canyon-2-right.jpg" 
                             alt="canyon-1">
                     </div>
                 </div>
                 <div class="sliders__item">
-                    <div class="sliders__item_part sliders__item_left">       
+                    <div class="sliders__item_part sliders__item_left">  
+                        <h1>CONTENT</h1>      
                         <img src="content/img/imgSlider /canyon-3-left.jpg"                
                             alt="canyon-1">
                     </div>
                     <div class="sliders__item_part sliders__item_right">
+                        <h1>Library</h1>
                         <img src="content/img/imgSlider /canyon-3-right.jpg" 
                             alt="canyon-1">
                     </div>
                 </div>
                 <div class="sliders__item">
-                    <div class="sliders__item_part sliders__item_left">       
+                    <div class="sliders__item_part sliders__item_left">  
+                        <h1>CONTENT</h1>      
                         <img src="content/img/imgSlider /canyon-4-left.jpg"                
                             alt="canyon-1">
                     </div>
                     <div class="sliders__item_part sliders__item_right">
+                        <h1>Library</h1>
                         <img src="content/img/imgSlider /canyon-4-right.jpg" 
                             alt="canyon-1">
                     </div>
@@ -101,29 +107,89 @@
                 </li>
                 <li class="vertical__menu_item">
                     <a href="#" data-target="sound">
-                        <img src="content/img/icon/homeIcon.svg" alt="homeIcon">
+                        <img src="content/img/icon/headphones.svg" alt="headphones">
                         <span>Audio</span>
                     </a>
                 </li>
                 <li class="vertical__menu_item">
-                    <a href="#" data-target="sound">
-                        <img src="content/img/icon/homeIcon.svg" alt="homeIcon">
+                    <a href="#" data-target="video">
+                        <img src="content/img/icon/film.svg" alt="film">
                         <span>Video</span>
                     </a>
                 </li>
                 <li class="vertical__menu_item">
                     <a href="#" data-target="photo">
-                        <img src="content/img/icon/homeIcon.svg" alt="homeIcon">
+                        <img src="content/img/icon/electronics.svg" alt="photocam">
                         <span>Image</span>
                     </a>
                 </li>
             </ul>
         </aside>
-        <section id="content" class="container content">
+        <section id="content" class="content">
             <h1>Content Library</h1>
             <p>You can search, sort, filter and add to favorite (вставить картинку )</p>
         </section>
     </main>
+    <section id="contact" class="contact container">
+        <div class="contact__wrap">
+            <h1>Contact Us</h1>
+            <form class="contact__form feedback-form" action="#" method="post">
+                <label for="name">
+                    <input name="name" class="feedback-form__item   feedback-form__item_name" type="text" placeholder="Name">
+                </label>
+                <label for="email">
+                    <input name="email" class="feedback-form__item feedback-form__item_email" type="email" placeholder="Email">
+                </label>
+                <label for="phone">
+                    <input name="phone" class="feedback-form__item feedback-form__item_phone" type="tel" placeholder="Phone">
+                </label>
+                <label for="text">
+                    <textarea name="text" class="feedback-form__item feedback-form__item_text" cols="5" rows="1">Type your message...
+                    </textarea>
+                </label>
+                <label for="submit">
+                    <button class="feedback-form__item   feedback-form__item_submit" name="submit" type="submit">Send</button>
+                </label>
+            </form>
+            <div class="contact__info">
+                <a href="tel:+380630311568">Phone +55 111 111 11 55</a>
+                <a href="mailto:someone@youmail.com">someone@youmail.com</a>
+            </div>
+        </div>
+        <div class="contact__wrap">
+            <!--тут будет карта!!!!!-->
+        </div>
+    </section>
+    <footer id="footer" class="footer">
+        <div class="footer__wrap container">
+        <ul class="footer__nav">
+            <li> 
+                <a class="footer__nav-item" href="#home">Home</a>
+            </li>
+            <li>
+                <a class="footer__nav-item" href="#content">Content</a>
+                <ul>
+                    <li><a href="#content">Audio</a></li>
+                    <li><a href="#content">Video</a></li>
+                    <li><a href="#content">Image</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="footer__nav-item" href="#contact">Contact</a>
+            </li>
+            </ul>
+            <div class="footer__copyright">
+                <span class="footer__copyright-copy">Copyright 2020</span>
+                <span class="footer__copyright-name">Anastasiia Trofimova</span>
+            </div>
+            <div class="footer__social">
+                <a class="footer__social_link" href="mailto:someone@youmail.com"><img src="/content/img/icon/envelope.svg"></a>
+                <a class="footer__social_link" href="https://www.facebook.com/amiccca"><img src="/content/img/icon/facebook.svg"></a>
+                <a class="footer__social_link" href="https://www.youtube.com/"><img src="/content/img/icon/logo.svg"></a>
+            </div>
+        </div>
+        
+    </footer>
    
     <script src="script/burgerMenu.js"></script>
     <script src="script/carousel.js"></script>

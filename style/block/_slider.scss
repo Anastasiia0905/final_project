@@ -1,10 +1,9 @@
-.container {
-    //overflow: auto;
-    &_slider {
-        width: 100vw;
-        height: 98vh;
-    }
-}
+.container_slider {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 90vh;   
+ }
 .sliders {
     width: 100%;
     height: 100%;
@@ -15,17 +14,25 @@
         height: 100%;
         &_part {
             position: absolute;
+            overflow: hidden;
 			width: 50%;
 			height: 100%;
-			overflow: hidden;
 			transition: transform 1s ease-in-out;
 			img{
                 position: absolute;
-				z-index: 1;
 				width: 100%;
 				height: 90%;
-				object-fit: cover;
-				transition: transform 1s ease-in-out;
+                transition: transform 1s ease-in-out;
+                object-fit: cover;
+            }
+            h1 {
+                font-size: 2em;
+                position: absolute;
+                z-index: 3;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                letter-spacing: .5em;
             }
         }
         &_left {
@@ -59,21 +66,5 @@
             transform: translateX(0);
         }
     }
-    /*&__control {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        &_list {
-            color: #fff;
-            display: flex;
-            justify-content: space-around;
-            li {
-                list-style: none;
-            }
-            li.current {
-                color: red;
-            }
-        }
-    }*/
 }
+

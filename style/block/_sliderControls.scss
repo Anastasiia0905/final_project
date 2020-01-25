@@ -10,15 +10,15 @@
         justify-content: space-around;
         li {
             display: inline-block;
-            height: 14px;
-            width: 14px;
+            height: 1em;
+            width: 1em;
             border: 2px solid $main-text-color;
             background-color: transparent;
             transition: all 0.4s ease-in-out;
         }
         li:hover {
-            height: 16px;
-            width: 16px;
+            height: 1.1em;
+            width: 1.1em;
         }
         li.prev, li.next {
             border: solid $main-text-color;

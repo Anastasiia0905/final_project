@@ -1,0 +1,22 @@
+.contact {
+    display: flex;
+    height: 100vh;
+    color: $main-text-color;
+    &__wrap {
+        width: 50%;
+        margin: 10% ;
+        text-align: center;
+    }
+    &__form {
+        height: 70%;
+        margin: 0 auto;
+    }
+    &__info {
+        padding-top: 20%;
+        line-height: 34px;
+        a {
+            color: $main-text-color;
+           
+        }
+    }
+}
