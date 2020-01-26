@@ -1,6 +1,6 @@
 .vertical__wrap {
-    overflow: auto;
-    min-width: 20vw;
+    overflow-y: hidden;
+    width: 20vw;
     background-color: $nav-bgcolor;
 }
 .vertical__menu {
@@ -44,6 +44,7 @@
     }
     
 }
+
 @media screen and (max-width: 728px) {
     .vertical__wrap {
         max-width: 10vw;

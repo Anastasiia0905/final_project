@@ -82,11 +82,10 @@ h1 {
 /// temporary style
 main {
     display: flex;
-    height: 95vh;
+    height: auto;
+    max-height: 90vh;
     background-color: #fff;
     overflow: auto;
-
-    //box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #a2a9b1;
 }
 
 

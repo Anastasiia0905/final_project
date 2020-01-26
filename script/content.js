@@ -3,18 +3,21 @@
 const linkContent = document.querySelector('.vertical__menu'); 
 const divContent = document.querySelector('.content'); 
 const contentWrapper = document.createElement('div');
+const pagWrap = document.createElement('div');
 
-
+// Очищаем контейнер
 const cleanDiv = (div) => {  
     while(div.firstChild){  
         div.removeChild(div.firstChild); 
     }
 }
+// Получаем данные с JSON файла
 async function getData(target){
     let response = await fetch(target);
     let data  = await response.json();
     return data;
 };
+
 const setToLocal = (data, type)=> {
     localStorage.removeItem(`${type}`);
     localStorage.setItem(`${type}`, JSON.stringify(data))
@@ -50,7 +53,12 @@ const soundCreate = (name, artist, genre, url, id) => {
 
         playItem.setAttribute('id', id);
         likeItem.setAttribute('id', id)
-
+        
+       
+       if(localStorage.getItem('likedSound').includes(id)){
+           likeItem.classList.add('active');
+       }
+        
         holder.classList.add('sound__item');
         playItem.classList.add('button', 'sound__button', 'button-play');
         likeItem.classList.add('button', 'sound__button', 'button-like');
@@ -79,14 +87,82 @@ const videoCreate = (url, duration) => {
 }
 async function filterFunc (e, obj, genre){
     const filterParam = e.target.value;
-    console.log(filterParam);
     let selected = await obj.filter(item => item.genre == filterParam);
     if(selected == ''){return obj}
     else {
         return selected;
     }   
 }
+const findMatch = (word, obj)=>{
+    return obj.filter(item => {
+          const regex = new RegExp(word, 'gi');
+          return item.artist.match(regex) || item.name.match(regex);
+      })
+  }
+const render = (obj)=> {
+    cleanDiv(contentWrapper);
+    if(!obj.length){
+        contentWrapper.innerHTML = `<div class="content__nothing">
+        <h1 class="content__nothing_text">Sorry, we find nothing</h1>
+        <img class="content__nothing_img" src='/content/img/icon/see.svg' alt='beenocle'>
+        </div>` 
+    } else {
+        if(obj[0].type === 'sound'){
+            obj.forEach((element) => {              
+                contentWrapper.appendChild(
+                    soundCreate(element.name, element.artist, element.genre, element.url, element.id)
+                    );
+            });
+        } else if (obj[0].type === 'photo'){
+            obj.forEach((element) => {
+                contentWrapper.appendChild(photoCreate(element.alt, element.url, element.category));
+            });
+            contentWrapper.classList.add('img-section__wrap');
+        } else if(obj[0].type === 'video'){
+            obj.forEach((element) => {                
+                contentWrapper.appendChild(
+                videoCreate(element.url, element.duration)
+                );
+            });
+        }
+    }
+    divContent.appendChild(contentWrapper);
+}
+  const pagination = (obj) =>{
+    let ul = document.createElement('ul'); 
+    if(pagWrap.hasChildNodes(ul)){
+        pagWrap.innerHTML = ''; 
+    }
+    let onPage = 5;
+    let countOfPage = Math.ceil(obj.length / onPage);
+    for(let i = 1; i <= countOfPage; i++){
+        let li = document.createElement('li');
+        li.textContent = i;
+        ul.appendChild(li);
+    }
+    pagWrap.appendChild(ul);
+    divContent.appendChild(pagWrap)
+    render(obj.slice(0, onPage));
+    ul.addEventListener('click', (e) => {
+        let pageNum = +e.target.innerHTML;
+        let start = (pageNum - 1) * onPage;
+        let end = start + onPage;
+        let note = obj.slice(start, end)
+        render(note);
+    });
 
+} 
+const storageQuery = (get, key, arr) => {
+    if(get) {
+        if(localStorage.getItem(key)){
+            JSON.parse(localStorage.getItem(key)).forEach(id => arr.push(id))
+        }
+       
+    } else {
+        localStorage.setItem(key, JSON.stringify(arr));
+    }
+}
+// по клику на определенный пункт меню выводит нужный контент
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
     target = e.target.parentElement.dataset.target; 
@@ -165,8 +241,8 @@ const soundRender = (data) => {
     cleanDiv(divContent);
     
     //______________FILTER + FORM_______________
-    const filterForm = document.createElement('form');
-    const inputForm = document.createElement('input');
+    const filterForm = document.createElement('form'); //
+    const inputForm = document.createElement('input'); ///
     const selectForm = document.createElement('select');
     const blues = document.createElement('option');
     const latina = document.createElement('option');
@@ -182,10 +258,8 @@ const soundRender = (data) => {
     latina.textContent = 'latina';
     holiday.textContent = 'holiday';
     classic.textContent = 'classic';
-    likeLabel.textContent = 'select you favorite music'
 
-
-    inputForm.type = 'text';
+    inputForm.type = 'text'; //
     likeForm.type = 'checkbox';
     likeForm.id = 'likeForm'
     likeLabel.setAttribute('for', 'likeForm');
@@ -197,7 +271,7 @@ const soundRender = (data) => {
     selectForm.appendChild(classic)
     likeLabel.appendChild(likeForm);
 
-    filterForm.appendChild(inputForm);
+    filterForm.appendChild(inputForm); //
     filterForm.appendChild(selectForm);
     filterForm.appendChild(likeForm);
     filterForm.appendChild(likeLabel);
@@ -210,136 +284,70 @@ const soundRender = (data) => {
 
     
   
-    //___________SAVE DATA TO LOCAL STORE___________
-    let obj = setToLocal(data, 'sound');
+   
+let obj = setToLocal(data, 'sound');
 
-    //____________RENDER CONTENT__________________
-    const render = (obj)=> {
-        cleanDiv(contentWrapper);
-        if(!obj.length){
-            contentWrapper.innerHTML = `<div class="content__nothing">
-            <h1 class="content__nothing_text">Sorry, we find nothing</h1>
-            <img class="content__nothing_img" src='/content/img/icon/see.svg' alt='beenocle'>
-            </div>` 
-        } else {
-            obj.forEach((element) => {              
-            contentWrapper.appendChild(
-                soundCreate(element.name, element.artist, element.genre, element.url, element.id)
-                );
-            });
-        }
-        divContent.appendChild(contentWrapper);
-        console.log(obj);
-        
-    }
-    
-    //_______________LIKEDSOUND________________
-    let likedSound = []; 
 
-    likeForm.addEventListener('change', ()=> {
-        if(likeForm.checked){
-            let selected = obj.filter(item => likedSound.includes(item.id));
+let likedSound = []; 
+likeForm.addEventListener('change', ()=> {
+    if(likeForm.checked){
+        let selected = obj.filter(item => likedSound.includes(item.id));
             pagination(selected);
-        }else if(!likeForm.checked){
+        } else if(!likeForm.checked){
             pagination(obj)
         }
-       
     });
-   const storageQuery = (get) => {
-        if(get) {
-            if(localStorage.getItem('likedSound')){
-                JSON.parse(localStorage.getItem('likedSound')).forEach(id => likedSound.push(id))
-            }
-           
-        } else {
-            localStorage.setItem('likedSound', JSON.stringify(likedSound));
-        }
+const toggleLikeSound = id => {
+    if(likedSound.indexOf(id) + 1){
+        likedSound.splice(likedSound.indexOf(id), 1)
+    } else {
+        likedSound.push(id);
     }
-    const toggleLikeSound = id => {
-        if(likedSound.indexOf(id) + 1){
-            likedSound.splice(likedSound.indexOf(id), 1)
-        } else {
-            likedSound.push(id);
-        }
-        storageQuery()
-    }
-
-
-    contentWrapper.addEventListener('click', (e)=> {
-        if(e.target.classList.contains('button-like')){
-            e.target.classList.toggle('active')
-            toggleLikeSound(e.target.id);
-            console.log(likedSound);
-        } 
-        else if(e.target.classList.contains('button-play')){
-            console.log(e.target);
-        }
-    });
-
-    
-    //______________FILTER INPUT______________
-    const findMatch = (word, obj)=>{
-      return obj.filter(item => {
-            const regex = new RegExp(word, 'gi');
-            return item.artist.match(regex) || item.name.match(regex);
-        })
-        
-    }
-    const displayMatch = (value)=> {
-        let match = findMatch(value, obj);
-        if(!match.length){
-            contentWrapper.innerHTML = `<div class="content__nothing">
-            <h1>Sorry, we find nothing</h1>
-            <img src='/content/img/icon/see.svg' alt='beenocle'>
-            </div>` ///  нужно придумать как вывести отсутвие
-            
-        }
-        return findMatch(value, obj);
-        
-    }
-    inputForm.addEventListener('keyup', (e) => {
-        let res = inputForm.value.trim();
-        pagination(displayMatch(res));
-    })
-    storageQuery(true);
-    //____________PAGINATION____________
-
-    const pagWrap = document.createElement('div');
-    const pagination = (obj) =>{
-    let ul = document.createElement('ul'); 
-    if(pagWrap.hasChildNodes(ul)){
-        pagWrap.innerHTML = ''; 
-    }
-    let onPage = 5;
-    let countOfPage = Math.ceil(obj.length / onPage);
-    for(let i = 1; i <= countOfPage; i++){
-        let li = document.createElement('li');
-        li.textContent = i;
-        ul.appendChild(li);
-    }
-    pagWrap.appendChild(ul);
-    divContent.appendChild(pagWrap)
-    render(obj.slice(0, onPage));
-    ul.addEventListener('click', (e) => {
-        let pageNum = +e.target.innerHTML;
-        let start = (pageNum - 1) * onPage;
-        let end = start + onPage;
-        let note = obj.slice(start, end)
-        render(note);
-    });
-
+        storageQuery(false, 'likedSound', likedSound)
 }
+   
+    
+storageQuery(true, 'likedSound', likedSound);
+    
+
 contentWrapper.classList.remove('video__wrap');
 contentWrapper.classList.remove('img-section__wrap');
 contentWrapper.classList.add('sound__wrap');
 divContent.addEventListener('onload', pagination(obj));
 
+inputForm.addEventListener('keyup', (e) => {
+    let res = inputForm.value.trim();
+    pagination(findMatch(res, obj));
+})
+;
 selectForm.addEventListener('change', (e)=> {
     filterFunc(e, obj)
         .then(selected => pagination(selected))
         .then(pagination(obj))
+    });
+    
+contentWrapper.addEventListener('click', (e)=> {
+    if(e.target.classList.contains('button-like')){
+            e.target.classList.toggle('active')
+            toggleLikeSound(e.target.id);
+      } 
+    else if(e.target.classList.contains('button-play')){
+            let arr = document.querySelectorAll('.button-play');
+            arr.forEach(item => {
+                if(item.classList.contains('active')){
+                    item.classList.remove('active');
+                    item.parentElement.lastChild.pause();
+                }
+                else if(item == e.target){
+                    item.classList.toggle('active');
+                    item.parentElement.lastChild.play();
+                }
+            })
+    }
 });
+
 }
+
    
 
 
@@ -347,16 +355,7 @@ selectForm.addEventListener('change', (e)=> {
 
 const photoRender = (data)=> {
     cleanDiv(divContent);   
-    let obj = setToLocal(data);
-    const render = (obj)=> {
-        cleanDiv(contentWrapper);
-        obj.forEach((element) => {
-            contentWrapper.appendChild(photoCreate(element.alt, element.url, element.category));
-        });
-        divContent.appendChild(contentWrapper);
-        contentWrapper.classList.add('img-section__wrap')
-    }
-    
+    let obj = setToLocal(data, `photo`);
     render(obj)
     const lightbox = document.createElement('div');
     lightbox.classList.add('lightbox');

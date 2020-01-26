@@ -397,8 +397,8 @@
 }
 
 .vertical__wrap {
-  overflow: auto;
-  min-width: 20vw;
+  overflow-y: hidden;
+  width: 20vw;
   background-color: #fbfbfb;
 }
 
@@ -506,6 +506,7 @@
   height: auto;
   max-width: 300px;
   cursor: pointer;
+  font-size: 0.5em;
   /* box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #b08be0; */
 }
 
@@ -589,21 +590,35 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 80vw;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  height: 50px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f5f8fe;
 }
 
 .sound__form input, .sound__form select, .sound__form label {
-  font-size: 14px;
-  line-height: 33px;
+  font-size: 0.7em;
   position: relative;
   min-width: 100px;
+  margin: 5px;
+  min-height: 30px;
   padding: 5px;
   border: 1px solid #b08be0;
   border-radius: 5px;
   outline: none;
   background-color: transparent;
+}
+
+.sound__form input {
+  width: 90%;
+}
+
+.sound__form select, .sound__form label {
+  width: 40%;
 }
 
 .sound__form input:focus, .sound__form input:hover,
@@ -615,18 +630,26 @@
   display: none;
 }
 
-.sound__form label {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.sound__form label::after {
+  content: "select your favorite music";
+  position: absolute;
   text-align: center;
+  width: 100%;
+  display: inline-block;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 
 .sound__form input[type='checkbox']:checked ~ label {
   color: #fff;
   background-color: #7532e0;
   border: none;
+}
+
+.sound__wrap {
+  position: relative;
+  padding-bottom: 50px;
 }
 
 .sound__item {
@@ -666,6 +689,11 @@
 .button-like.active {
   background: url("/content/img/icon/heart.png") no-repeat center center;
   background-size: contain;
+}
+
+audio.active {
+  display: inline-block;
+  border: 1px solid red;
 }
 
 .video__wrap {
@@ -869,7 +897,8 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 95vh;
+  height: auto;
+  max-height: 90vh;
   background-color: #fff;
   overflow: auto;
 }

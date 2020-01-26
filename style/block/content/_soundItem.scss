@@ -1,3 +1,7 @@
+.sound__wrap {
+    position: relative;
+    padding-bottom: 50px;
+}
 .sound{
     &__item {
         display: grid;
@@ -12,7 +16,8 @@
         audio {
             outline: none;
             position: absolute;
-           display: none;
+            display: none;
+
         }
     }
 }
@@ -29,4 +34,8 @@
 .button-like.active {
    background: url('/content/img/icon/heart.png') no-repeat center center;
    background-size: contain;
+}
+audio.active {
+    display: inline-block;
+    border: 1px solid red;
 }
