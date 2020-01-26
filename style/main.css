@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: 'Lato Bold';
   src: url("/fonts/lato/Lato-Black.ttf") format("ttf");
@@ -425,15 +424,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 2em;
+  padding: 2em 0;
+  color: #8b92a0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  padding: 20px 0;
-  height: 26px;
-  color: #8b92a0;
 }
 
 .vertical__menu_item img {
@@ -450,18 +449,21 @@
 }
 
 .vertical__menu_item:hover:after {
-  content: "";
   position: absolute;
+  top: 0;
+  left: 0;
   width: 3px;
   height: 100%;
+  content: '';
   background-color: #b08be0;
-  left: 0;
-  top: 0;
 }
 
 @media screen and (max-width: 728px) {
   .vertical__wrap {
     max-width: 10vw;
+  }
+  .vertical__wrap img {
+    margin: 0 auto;
   }
   .vertical__wrap span {
     display: none;
@@ -472,40 +474,12 @@
   width: 100%;
   overflow: auto;
   position: relative;
+  color: #000;
+  padding: 15px;
+  -webkit-box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
+          box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
 }
 
-/*.content .sound {  //подровнять
-    //overflow: auto;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    h1 {
-        text-transform: uppercase;
-    }}
-.content__item {
-      line-height: 60px;
-      border-bottom: 1px solid #8b92a0;
-      padding-left: 20px;
-      cursor: pointer;
-      span {
-          display: inline-block;
-          width: 30%;
-      }
-      span:first-child {
-          width: 40%;
-      }
-      span:first-child::before {
-          content: " ";
-          display: inline-block;
-          background-image: url('/content/img/icon/play.svg');
-          width: 16px;
-          height: 16px;
-          
-      }
-      audio {
-          //display: none; //довавить возпроизвидение 
-      }
-    }*/
 .img-section__wrap {
   display: -ms-grid;
   display: grid;
@@ -789,13 +763,13 @@ h1 {
 
 @media screen and (max-width: 1441px) {
   body {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 
 @media screen and (max-width: 920px) {
   body {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -833,12 +807,5 @@ main {
   height: 95vh;
   background-color: #fff;
   overflow: auto;
-}
-
-.content {
-  color: #000;
-  padding: 15px;
-  -webkit-box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
-          box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
 }
 /*# sourceMappingURL=main.css.map */
