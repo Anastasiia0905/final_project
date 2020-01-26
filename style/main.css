@@ -726,18 +726,20 @@ audio.active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100vh;
   color: #fff;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
 }
 
 .contact__wrap {
   width: 50%;
-  margin: 10%;
+  margin: 5%;
   text-align: center;
 }
 
 .contact__form {
-  height: 70%;
   margin: 0 auto;
 }
 
@@ -748,6 +750,10 @@ audio.active {
 
 .contact__info a {
   color: #fff;
+}
+
+.contact__map {
+  width: 100%;
 }
 
 .feedback-form {
@@ -840,6 +846,25 @@ audio.active {
 
 .footer {
   background-color: rgba(139, 146, 160, 0.2);
+  font-size: 0.4em;
+}
+
+.footer__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+.footer__nav a {
+  color: #8b92a0;
+}
+
+.footer__social img {
+  width: 1em;
+  height: 1em;
 }
 
 body {

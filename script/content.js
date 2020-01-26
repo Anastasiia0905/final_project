@@ -83,7 +83,7 @@ const photoCreate = (alt, url, category) => {
 
         return figureItem;
 }
-const videoCreate = (url, duration) => {
+const videoCreate = (url, duration,) => {
     let video = document.createElement('video');
     video.src = url;
     video.dataset.duration = duration;
@@ -93,6 +93,7 @@ const videoCreate = (url, duration) => {
 }
 async function filterFunc (e, obj, genre){
     const filterParam = e.target.value;
+    console.log(filterParam);
     let selected = await obj.filter(item => item.genre == filterParam);
     if(selected == ''){return obj}
     else {
@@ -215,7 +216,42 @@ const homeRender = () => {
     contentWrapper.classList.remove('video__wrap');
     
 }
+const searchFormVideo = () => {
+    const filterForm = document.createElement('form');
+    const selectForm = document.createElement('select');
+    const all = document.createElement('option');
+    const sky = document.createElement('option');
+    const food = document.createElement('option');
+    const people = document.createElement('option');
+    const likeForm = document.createElement('input');
+    const likeLabel = document.createElement('label');
 
+    all.textContent = 'all';
+    sky.textContent =  'sky';
+    food.textContent = 'food';
+    people.textContent = 'people';
+
+    likeForm.type = 'checkbox';
+    likeForm.id = 'likeForm'
+    likeLabel.setAttribute('for', 'likeForm');
+
+    selectForm.appendChild(all)
+    selectForm.appendChild(sky)
+    selectForm.appendChild(people)
+    selectForm.appendChild(food)
+    
+    likeLabel.appendChild(likeForm);
+    filterForm.appendChild(selectForm);
+    filterForm.appendChild(likeForm);
+    filterForm.appendChild(likeLabel);
+    
+    divContent.appendChild(filterForm);
+
+
+    filterForm.classList.add('sound__form');
+    return filterForm;
+
+}
 //!!!!!!!СТРУКТУРИРОВАТЬ КОД!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // функция, которая прорисовует необходимый контент
 // функция, которая открывает модальное окно для выбраного элемента
@@ -231,20 +267,44 @@ const homeRender = () => {
 // решить проблему с лайками
 const videoRender = (data) => {
     cleanDiv(divContent);
+    const filterForm = searchFormVideo();
+    divContent.appendChild(filterForm);
+    let likedVideo = [];
     let obj = setToLocal(data, 'video');
     const render = (obj) => {
         cleanDiv(contentWrapper);
         obj.forEach((element) => {                
             contentWrapper.appendChild(
-                videoCreate(element.url, element.duration)
+                videoCreate(element.url, element.duration, element.genre)
                 );
             });
             divContent.appendChild(contentWrapper)
     }
-
+filterForm.addEventListener('change', (e)=> {
+    if(e.target.tagName === 'SELECT'){
+        filterFunc(e, obj)
+            .then(selected => render(selected))
+    } else if(e.target.tagName == 'INPUT'){
+        let sortO = obj;
+        console.log(sortO);
+        sortO.sort(function (a, b) {
+            if (a.duration > b.duration) {
+              return 1;
+            }
+            if (a.duration < b.duration) {
+              return -1;
+            }
+            // a должно быть равным b
+            return 0;
+          });
+         render(sortO); 
+    }
+        
+})
 contentWrapper.classList.remove('img-section__wrap');
 contentWrapper.classList.remove('sound__wrap');
 contentWrapper.classList.add('video__wrap');
+
 divContent.addEventListener('onload', render(obj))
 }
 
@@ -253,6 +313,7 @@ const soundRender = (data) => {
     cleanDiv(divContent);
     
     //______________FILTER + FORM_______________
+    
     const filterForm = document.createElement('form'); //
     const inputForm = document.createElement('input'); ///
     const selectForm = document.createElement('select');
@@ -327,7 +388,7 @@ contentWrapper.classList.remove('img-section__wrap');
 contentWrapper.classList.add('sound__wrap');
 divContent.addEventListener('onload', pagination(obj));
 
-inputForm.addEventListener('keyup', (e) => {
+filterForm.addEventListener('keyup', (e) => {
     let res = inputForm.value.trim();
     pagination(findMatch(res, obj));
 })
@@ -345,6 +406,7 @@ contentWrapper.addEventListener('click', (e)=> {
       } 
     else if(e.target.classList.contains('button-play')){
             let arr = document.querySelectorAll('.button-play');
+            console.log(arr);
             arr.forEach(item => {
                 if(item.classList.contains('active')){
                     item.classList.remove('active');
