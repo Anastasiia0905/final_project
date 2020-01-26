@@ -697,15 +697,29 @@ audio.active {
 }
 
 .video__wrap {
-  -webkit-columns: 2;
-          columns: 2;
-  -webkit-column-gap: 20px;
-          column-gap: 20px;
+  -webkit-columns: 3;
+          columns: 3;
+  -webkit-column-gap: 40px;
+          column-gap: 40px;
 }
 
 .video__wrap video {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   width: 100%;
+}
+
+@media screen and (max-width: 728px) {
+  .video__wrap {
+    -webkit-columns: 2;
+            columns: 2;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .video__wrap {
+    -webkit-columns: 1;
+            columns: 1;
+  }
 }
 
 .contact {

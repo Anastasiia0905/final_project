@@ -24,6 +24,14 @@ const setToLocal = (data, type)=> {
     let contentArr = JSON.parse(localStorage.getItem(`${type}`));
     return contentArr;
 }
+const show = [];
+const showLiked = (id, key,arr) =>{
+    if(localStorage.getItem(key).includes(id)){
+        arr.classList.add('active');
+        show.push(id);
+        console.log(show);
+    }
+}
 
 const soundCreate = (name, artist, genre, url, id) => {
         let holder = document.createElement('div');
@@ -55,9 +63,7 @@ const soundCreate = (name, artist, genre, url, id) => {
         likeItem.setAttribute('id', id)
         
        
-       if(localStorage.getItem('likedSound').includes(id)){
-           likeItem.classList.add('active');
-       }
+        showLiked(id, 'likedSound', likeItem);
         
         holder.classList.add('sound__item');
         playItem.classList.add('button', 'sound__button', 'button-play');
@@ -99,6 +105,7 @@ const findMatch = (word, obj)=>{
           return item.artist.match(regex) || item.name.match(regex);
       })
   }
+
 const render = (obj)=> {
     cleanDiv(contentWrapper);
     if(!obj.length){
@@ -186,12 +193,16 @@ linkContent.addEventListener('click', (e)=> {
 const homeRender = () => {
     cleanDiv(divContent);
     cleanDiv(contentWrapper);
+    
     contentWrapper.innerHTML = `<div class="content__download">
                 <span class="content__download_button">+ Click to add new file</span>
                 <form action="post" class="download__form">
                     <input type="file" name="file_download">
                     <input type="submit">
                 </form>
+            </div>
+            <div>
+           ${show}
             </div>
     `
     divContent.appendChild(contentWrapper);
@@ -200,7 +211,8 @@ const homeRender = () => {
     addButton.addEventListener('click', (e)=> {
         console.log(formDownload);
         formDownload.classList.add('active');
-    })
+    });
+    contentWrapper.classList.remove('video__wrap');
     
 }
 

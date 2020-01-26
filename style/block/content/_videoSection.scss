@@ -1,8 +1,18 @@
 .video__wrap {
-    columns: 2;
-    column-gap: 20px;
+    columns: 3;
+    column-gap: 40px;
     video {
-       margin-bottom: 10px;
+       margin-bottom: 40px;
         width: 100%;
+    }
+}
+@media screen and (max-width: 728px) {
+    .video__wrap {
+        columns: 2;
+    }
+}
+@media screen and (max-width: 481px){
+    .video__wrap {
+        columns: 1;
     }
 }
