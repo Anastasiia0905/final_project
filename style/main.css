@@ -424,7 +424,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 2em;
+  height: 1.5em;
   padding: 2em 0;
   color: #8b92a0;
   -webkit-box-align: center;
@@ -478,6 +478,71 @@
   padding: 15px;
   -webkit-box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
           box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, 0.2), 0 0 #b08be0;
+}
+
+.content__nothing {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: rgba(139, 146, 160, 0.5);
+  text-align: center;
+  font-weight: 500;
+  vertical-align: baseline;
+}
+
+.content__nothing_img {
+  max-width: 300px;
+}
+
+.content__download {
+  padding: 1.5em;
+  border: 1px dashed;
+  -webkit-box-shadow: -18px 8px 51px -13px rgba(0, 0, 0, 0.77);
+          box-shadow: -18px 8px 51px -13px rgba(0, 0, 0, 0.77);
+  height: auto;
+  max-width: 300px;
+  cursor: pointer;
+  /* box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #b08be0; */
+}
+
+.content__download .download__form {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.content__download .download__form input {
+  font-size: 14px;
+  line-height: 33px;
+  position: relative;
+  min-width: 100px;
+  padding: 5px;
+  border: 1px solid #b08be0;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.content__download .download__form input[type='submit']:hover {
+  color: #fff;
+  background-color: #7532e0;
+  border: none;
+}
+
+.content__download .download__form.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .img-section__wrap {
@@ -571,7 +636,7 @@
       grid-template-columns: 25px 25px 1fr 1fr 0.5fr;
   grid-gap: 20px;
   border-top: 1px solid #8b92a0;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 1.5rem;
 }
 

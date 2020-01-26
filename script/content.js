@@ -57,7 +57,7 @@ const soundCreate = (name, artist, genre, url, id) => {
         return holder;
 }
 
-const photoCreate = (alt, url,category) => {
+const photoCreate = (alt, url, category) => {
         let figureItem = document.createElement('figure');
         let imgItem = document.createElement('img');
         Object.assign(imgItem, {
@@ -101,11 +101,32 @@ linkContent.addEventListener('click', (e)=> {
     } else if(target === 'photo'){
         getData(targetURL)
             .then(data => photoRender(data))
+    } else if(target === 'home'){
+        homeRender();
     }
     
 });
 
-
+const homeRender = () => {
+    cleanDiv(divContent);
+    cleanDiv(contentWrapper);
+    contentWrapper.innerHTML = `<div class="content__download">
+                <span class="content__download_button">+ Click to add new file</span>
+                <form action="post" class="download__form">
+                    <input type="file" name="file_download">
+                    <input type="submit">
+                </form>
+            </div>
+    `
+    divContent.appendChild(contentWrapper);
+    const addButton = document.querySelector('.content__download_button');
+    const formDownload = document.querySelector('.download__form')
+    addButton.addEventListener('click', (e)=> {
+        console.log(formDownload);
+        formDownload.classList.add('active');
+    })
+    
+}
 
 //!!!!!!!СТРУКТУРИРОВАТЬ КОД!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // функция, которая прорисовует необходимый контент
@@ -189,25 +210,26 @@ const soundRender = (data) => {
 
     
   
-    //____________play like button_____________
-
-    
     //___________SAVE DATA TO LOCAL STORE___________
     let obj = setToLocal(data, 'sound');
 
     //____________RENDER CONTENT__________________
     const render = (obj)=> {
-        cleanDiv(contentWrapper); // clean content block
-        if(obj === null){
-            contentWrapper.innerHTML = 'nothing is match' //if nothing match
+        cleanDiv(contentWrapper);
+        if(!obj.length){
+            contentWrapper.innerHTML = `<div class="content__nothing">
+            <h1 class="content__nothing_text">Sorry, we find nothing</h1>
+            <img class="content__nothing_img" src='/content/img/icon/see.svg' alt='beenocle'>
+            </div>` 
         } else {
-            obj.forEach((element) => {                    // render 
+            obj.forEach((element) => {              
             contentWrapper.appendChild(
                 soundCreate(element.name, element.artist, element.genre, element.url, element.id)
                 );
             });
         }
         divContent.appendChild(contentWrapper);
+        console.log(obj);
         
     }
     
@@ -266,7 +288,11 @@ const soundRender = (data) => {
     const displayMatch = (value)=> {
         let match = findMatch(value, obj);
         if(!match.length){
-           console.log(111) ///  нужно придумать как вывести отсутвие
+            contentWrapper.innerHTML = `<div class="content__nothing">
+            <h1>Sorry, we find nothing</h1>
+            <img src='/content/img/icon/see.svg' alt='beenocle'>
+            </div>` ///  нужно придумать как вывести отсутвие
+            
         }
         return findMatch(value, obj);
         
@@ -301,6 +327,7 @@ const soundRender = (data) => {
         let note = obj.slice(start, end)
         render(note);
     });
+
 }
 contentWrapper.classList.remove('video__wrap');
 contentWrapper.classList.remove('img-section__wrap');
