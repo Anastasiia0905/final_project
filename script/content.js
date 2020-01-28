@@ -5,13 +5,13 @@ const divContent = document.querySelector('.content');
 const contentWrapper = document.createElement('div');
 const pagWrap = document.createElement('div');
 
-// Очищаем контейнер
+// Очищаем контейнер!!!
 const cleanDiv = (div) => {  
     while(div.firstChild){  
         div.removeChild(div.firstChild); 
     }
 }
-// Получаем данные с JSON файла
+// Получаем данные с JSON файла!!!!
 async function getData(target){
     let response = await fetch(target);
     let data  = await response.json();
@@ -24,12 +24,21 @@ const setToLocal = (data, type)=> {
     let contentArr = JSON.parse(localStorage.getItem(`${type}`));
     return contentArr;
 }
+const storageQuery = (get, key, arr) => {
+    if(get) {
+        if(localStorage.getItem(key)){
+            JSON.parse(localStorage.getItem(key)).forEach(id => arr.push(id))
+        }
+       
+    } else {
+        localStorage.setItem(key, JSON.stringify(arr));
+    }
+}
 const show = [];
 const showLiked = (id, key,arr) =>{
     if(localStorage.getItem(key).includes(id)){
         arr.classList.add('active');
-        show.push(id);
-        console.log(show);
+       
     }
 }
 
@@ -63,8 +72,7 @@ const soundCreate = (name, artist, genre, url, id) => {
         likeItem.setAttribute('id', id)
         
        
-        showLiked(id, 'likedSound', likeItem);
-        
+       console.log(showLiked(id, 'likedSound', likeItem));
         holder.classList.add('sound__item');
         playItem.classList.add('button', 'sound__button', 'button-play');
         likeItem.classList.add('button', 'sound__button', 'button-like');
@@ -160,16 +168,7 @@ const render = (obj)=> {
     });
 
 } 
-const storageQuery = (get, key, arr) => {
-    if(get) {
-        if(localStorage.getItem(key)){
-            JSON.parse(localStorage.getItem(key)).forEach(id => arr.push(id))
-        }
-       
-    } else {
-        localStorage.setItem(key, JSON.stringify(arr));
-    }
-}
+
 // по клику на определенный пункт меню выводит нужный контент
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -376,7 +375,7 @@ const toggleLikeSound = id => {
     } else {
         likedSound.push(id);
     }
-        storageQuery(false, 'likedSound', likedSound)
+        storageQuery(false, 'likedSound', likedSound);
 }
    
     
@@ -406,14 +405,13 @@ contentWrapper.addEventListener('click', (e)=> {
       } 
     else if(e.target.classList.contains('button-play')){
             let arr = document.querySelectorAll('.button-play');
-            console.log(arr);
             arr.forEach(item => {
                 if(item.classList.contains('active')){
                     item.classList.remove('active');
                     item.parentElement.lastChild.pause();
                 }
                 else if(item == e.target){
-                    item.classList.toggle('active');
+                    item.classList.add('active');
                     item.parentElement.lastChild.play();
                 }
             })
