@@ -1,0 +1,38 @@
+.content__download {
+        padding: 1.5em;
+        border: 1px dashed;
+        box-shadow: -18px 8px 51px -13px rgba(0,0,0,0.77);
+        height: auto;
+        max-width: 300px;
+        cursor: pointer;
+        font-size: 0.5em;
+        /* box-shadow: 0 -20px 90px -20px rgba(0, 0, 0, .2), 0 0 #b08be0; */
+    
+    .download__form {
+        display: none;
+        flex-direction: column;
+        min-height: 100px;
+        justify-content: space-around;
+        input {
+            font-size: 14px;
+            line-height: 33px;
+            position: relative;
+            min-width: 100px;
+            padding: 5px;
+            border: 1px solid $nav-color-hightlight;
+            border-radius: 5px;
+            outline: none;
+            background-color: transparent;
+            outline: none;
+        }
+        input[type='submit']:hover {
+            color: #fff;
+            background-color: $link-hightlight;
+            border: none;
+        }
+    }
+    .download__form.active {
+        display: flex;
+    }
+
+}

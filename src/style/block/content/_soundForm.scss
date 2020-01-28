@@ -1,0 +1,51 @@
+.sound{
+    &__form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 80vw;
+        justify-content: space-around;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: $nav-bgcolor-highlight;
+       // box-shadow: 0px 0px 23px -3px rgba($nav-color-hightlight,0.64);
+        input, select, label {
+            font-size: 0.7em;
+            position: relative;
+            min-width: 100px;
+            margin: 5px;
+            min-height: 30px;
+            padding: 5px;
+            border: 1px solid $nav-color-hightlight;
+            border-radius: 5px;
+            outline: none;
+            background-color: transparent;
+        }
+        input {
+            width: 90%;
+        }
+        select, label {
+            width: 40%;
+        }
+        input:focus, input:hover,
+        select:focus, select:hover {
+            border: 2px solid $link-hightlight;
+        }
+        input[type='checkbox']{
+            display: none;
+        }
+        label::after {
+            content: "select your favorite music";
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            display: inline-block;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        input[type='checkbox']:checked ~ label{
+           color: #fff;
+           background-color: $link-hightlight;
+           border: none;
+        }
+    }
+}

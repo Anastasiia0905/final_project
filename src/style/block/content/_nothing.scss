@@ -1,0 +1,15 @@
+.content__nothing {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-50%);
+    color: rgba($nav-color, 0.5);
+    text-align: center;
+    font-weight: 500;
+    vertical-align: baseline;
+    &_img {
+        max-width: 300px;
+    }
+}

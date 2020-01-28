@@ -5,3 +5,7 @@ content/photo
 content/fonts
 style/main.css
 style/main.css.map
+node_modules
+package-lock.json
+package.json
+webpack.config.js

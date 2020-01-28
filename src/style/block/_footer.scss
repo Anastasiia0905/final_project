@@ -1,0 +1,21 @@
+.footer {
+    background-color: rgba($nav-color, $alpha: 0.2);
+    font-size: 0.4em;
+    &__wrap {
+        display: flex;
+        justify-content: start;
+    }
+    &__nav {
+        
+        a{
+            color: $nav-color;
+        }
+    }
+    &__social {
+
+        img {
+            width: 1em;
+            height: 1em;
+        }
+    }
+}

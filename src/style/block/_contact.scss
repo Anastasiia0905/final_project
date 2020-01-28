@@ -1,0 +1,25 @@
+.contact {
+    display: flex;
+    color: $main-text-color;
+    align-items: center;
+    margin: 0 auto;
+    &__wrap {
+        width: 50%;
+        margin: 5%;
+        text-align: center;
+    }
+    &__form {
+        margin: 0 auto;
+    }
+    &__info {
+        padding-top: 20%;
+        line-height: 34px;
+        a {
+            color: $main-text-color;
+        }
+    }
+    &__map {
+        width: 100%;
+
+    }
+}
