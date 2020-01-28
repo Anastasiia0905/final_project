@@ -1,6 +1,6 @@
 .sound__wrap {
     position: relative;
-    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 .sound{
     &__item {
@@ -22,9 +22,10 @@
     }
 }
 .button-play{
-    background: url('/content/img/icon/play-button.svg') no-repeat center center;
+    border: 1px solid red;
+    background: url('../../../content/img/icon/play-button.svg') no-repeat center center;
 }
-.button-like {
+.button-like {border: 1px solid red;
     background: url('/content/img/icon/heart.svg') no-repeat center center;
 }
 .button-play.active {

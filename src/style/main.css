@@ -546,6 +546,34 @@
   display: flex;
 }
 
+.pagination__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  position: absolute;
+  bottom: 10px;
+}
+
+.pagination__nav li {
+  width: 1em;
+  margin: 0 5px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #b08be0;
+}
+
+.pagination__nav li:hover, .pagination__nav li.active {
+  cursor: pointer;
+  color: #fff;
+  background-color: #7532e0;
+}
+
 .img-section__wrap {
   display: -ms-grid;
   display: grid;
@@ -649,7 +677,7 @@
 
 .sound__wrap {
   position: relative;
-  padding-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .sound__item {
@@ -674,10 +702,12 @@
 }
 
 .button-play {
-  background: url("/content/img/icon/play-button.svg") no-repeat center center;
+  border: 1px solid red;
+  background: url("../../../content/img/icon/play-button.svg") no-repeat center center;
 }
 
 .button-like {
+  border: 1px solid red;
   background: url("/content/img/icon/heart.svg") no-repeat center center;
 }
 

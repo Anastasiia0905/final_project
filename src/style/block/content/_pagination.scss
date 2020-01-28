@@ -1,0 +1,21 @@
+.pagination__nav {
+    display: flex;
+    justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    bottom: 10px;
+    li {
+        width: 1em;
+        margin: 0 5px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid $nav-color-hightlight;
+    }
+    li:hover, li.active {
+        cursor: pointer;
+        color: #fff;
+        background-color: $link-hightlight;
+    }
+    
+}
