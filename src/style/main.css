@@ -498,6 +498,11 @@
   max-width: 300px;
 }
 
+.home__wrap {
+  display: -ms-grid;
+  display: grid;
+}
+
 .content__download {
   padding: 1.5em;
   border: 1px dashed;
@@ -544,6 +549,30 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.liked_sound {
+  padding: 5px;
+  padding-left: 1em;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  line-height: 2em;
+  background-color: rgba(43, 52, 227, 0.5);
+  width: 300px;
+  -webkit-box-shadow: 3px 29px 39px -2px rgba(0, 0, 0, 0.75);
+          box-shadow: 3px 29px 39px -2px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+}
+
+.liked_sound::before {
+  content: 'Your favorite song';
+  color: #000;
 }
 
 .pagination__nav {

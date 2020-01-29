@@ -8,6 +8,12 @@ import {soundRender} from './renderModules/soundRender'
 const linkContent = document.querySelector('.vertical__menu'); 
 const divContent = document.querySelector('.content'); 
 const contentWrapper = document.createElement('div');
+document.addEventListener('DOMContentLoaded', ()=>{
+
+    cleanDiv(divContent);
+    cleanDiv(contentWrapper);
+    homeRender(divContent, contentWrapper);
+})
 
 linkContent.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -35,3 +41,4 @@ linkContent.addEventListener('click', (e)=> {
     }
     
 });
+
