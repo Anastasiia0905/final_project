@@ -18,8 +18,8 @@ export const searchForm = (arr, formClass) => {
     checkLabel.setAttribute('for', 'checkForm');
 
     filterForm.appendChild(inputForm);
-    checkLabel.appendChild(checkForm);
     filterForm.appendChild(selectForm);
+    filterForm.appendChild(checkForm);
     filterForm.appendChild(checkLabel);
 
     filterForm.classList.add(formClass);

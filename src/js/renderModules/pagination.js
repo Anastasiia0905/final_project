@@ -22,6 +22,13 @@ export const pagination = (obj, pagWrap, divContent) =>{
 
 } 
 export const selectPage = (obj, e) => {
+        let ul = e.parentElement.childNodes
+       for(let i = 0; i < ul.length; i++){
+            if(ul[i].classList.contains('active')){
+                ul[i].classList.remove('active')
+            }
+       }    
+       
         e.classList.add('active')
         let pageNum = +e.innerHTML;
         let start = (pageNum - 1) * onPage;

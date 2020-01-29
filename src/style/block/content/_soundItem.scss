@@ -22,18 +22,17 @@
     }
 }
 .button-play{
-    border: 1px solid red;
-    background: url('../../../content/img/icon/play-button.svg') no-repeat center center;
+    background: url('/src/content/img/icon/play-button.svg') no-repeat center center;
 }
-.button-like {border: 1px solid red;
-    background: url('/content/img/icon/heart.svg') no-repeat center center;
+.button-like {
+    background: url('/src/content/img/icon/heart.svg') no-repeat center center;
 }
 .button-play.active {
-    background: url('/content/img/icon/stop.png') no-repeat center center;
+    background: url('/src/content/img/icon/stop.png') no-repeat center center;
     background-size: contain;
 }
 .button-like.active {
-   background: url('/content/img/icon/heart.png') no-repeat center center;
+   background: url('/src/content/img/icon/heart.png') no-repeat center center;
    background-size: contain;
 }
 audio.active {
