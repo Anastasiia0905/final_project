@@ -1,10 +1,11 @@
 .contact {
     display: flex;
+    flex-wrap: wrap;
     color: $main-text-color;
     align-items: center;
     margin: 0 auto;
     &__wrap {
-        width: 50%;
+        width: 40%;
         margin: 5%;
         text-align: center;
     }
@@ -14,12 +15,20 @@
     &__info {
         padding-top: 20%;
         line-height: 34px;
+        font-size: 0.5em;
         a {
             color: $main-text-color;
         }
     }
     &__map {
         width: 100%;
-
+    }
+}
+@media screen and (max-width: 728px) {
+    .contact {
+       &__wrap {
+          width: 80%;
+          justify-content: center;
+       }
     }
 }

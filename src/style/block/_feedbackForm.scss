@@ -8,6 +8,7 @@
         border: none;
         border-radius: 15px;
         padding: 5px 0px 5px 30px;
+        margin-bottom: 1.3em;
         outline: none;
         background-color: rgba($nav-color-hightlight, $alpha: 0.3);
         width: 300px;
@@ -17,7 +18,9 @@
             background-color: transparent;
             border-radius: 0;
             border-bottom: 1px solid $nav-color-hightlight;
+            resize: none;
             overflow: hidden;
+            line-height: 1em;
         }
         &_submit {
             width: 335px;   
@@ -32,7 +35,7 @@
     }
     label::before, button::before {
         position: absolute;
-        top: 50%;
+        top: 40%;
         display: inline-block;
         width: 20px;
         height: 20px;
@@ -43,15 +46,18 @@
         background-size: 20px 20px;
     }
     label[for='name']::before{
-        background-image: url('/content/img/icon/user.svg');
+        background-image: url('/src/content/img/icon/user.svg');
     }
     label[for='email']::before {
-        background-image: url('/content/img/icon/envelope.svg');
+        background-image: url('/src/content/img/icon/envelope.svg');
     }
     label[for='phone']::before {
-        background-image: url('/content/img/icon/phone.svg');
+        background-image: url('/src/content/img/icon/phone.svg');
     }
     label[for='submit']::before {
-        background-image: url('/content/img/icon/start-up.svg');
+        background-image: url('/src/content/img/icon/start-up.svg');
     }
+}
+@media screen and (max-width: 1441px) {
+
 }

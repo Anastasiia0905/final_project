@@ -7,7 +7,7 @@ import likedFunc from '../helpFunc/likedFunc'
 import {findMatch} from '../helpFunc/findMatch'
 import {storageQuery} from '../helpFunc/storageQuery'
 import {toggleLikeSound} from '../helpFunc/toggleLikeSound'
-import {showLiked} from '../helpFunc/showLiked'
+import { likeButton } from '../helpFunc/likeButton'
 
 const divContent = document.querySelector('.content');
 let likedSound = [];
@@ -65,23 +65,23 @@ export const soundRender = (data) => {
     })
 
     storageQuery(true, 'likedSound', likedSound);
-   
-    //console.log(objFromLocal);
-    //console.log(localStorage.getItem('likedSound'));
-   
-   // selected = obj.filter(item => likedSound.includes(item.id));
     const pagWrap = document.createElement('div');
     const contentWrapper = pagination(obj, pagWrap, divContent);
     divContent.appendChild(filterForm);
     divContent.appendChild(contentWrapper);
     pagWrap.addEventListener('click', () => {selectPage(obj, event.target)})
-   
-    const likeButton =  document.querySelectorAll('.button-like');
-    for(let i = 0; i < likeButton.length; i++){
-       if(likedSound.includes(likeButton[i].id)){
-        likeButton[i].classList.add('active')
-       }
+    const likeButton = ()=> {
+        const likedSound = localStorage.getItem('likedSound');
+        const likeButton =  document.querySelectorAll('.button-like');
+        for(let i = 0; i < likeButton.length; i++){
+            if(likedSound.includes(likeButton[i].id)){
+                likeButton[i].classList.add('active')
+            }
+        }
+        return likedSound;
     }
+    likeButton();
+    
   
    
 }

@@ -50,5 +50,27 @@ window.onload = () => {
 
 	})
 	
-
 }	
+
+	const elem = document.querySelector('.resize');
+	elem.style.boxSizing = 'border-box';
+	const offset = elem.offsetHeight - elem.clientHeight;
+	elem.addEventListener('keydown', (e)=> {
+		let scrol = e.target.scrollHeight;
+		console.log(scrol);
+		e.target.style.height = 'auto';
+		e.target.style.height = scrol	 + offset + 'px'
+	});
+
+
+/*function addAutoResize() {
+	document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+	  element.style.boxSizing = 'border-box';
+	  var offset = element.offsetHeight - element.clientHeight;
+	  document.addEventListener('input', function (event) {
+		event.target.style.height = 'auto';
+		event.target.style.height = event.target.scrollHeight + offset + 'px';
+	  });
+	  element.removeAttribute('data-autoresize');
+	});
+  }*/

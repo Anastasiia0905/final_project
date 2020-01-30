@@ -3,18 +3,18 @@
     font-size: 0.4em;
     &__wrap {
         display: flex;
-        justify-content: start;
+        justify-content: space-around;
+        align-items: flex-end;
     }
     &__nav {
-        
         a{
             color: $nav-color;
         }
     }
     &__social {
-
         img {
             width: 1em;
+            padding: 5px;
             height: 1em;
         }
     }

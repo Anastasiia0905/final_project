@@ -1,5 +1,6 @@
 import {render} from './render'
 
+
 const onPage = 5;
 export const pagination = (obj, pagWrap, divContent) =>{
     let ul = document.createElement('ul'); 
@@ -27,7 +28,7 @@ export const selectPage = (obj, e) => {
             if(ul[i].classList.contains('active')){
                 ul[i].classList.remove('active')
             }
-       }    
+       }   
        
         e.classList.add('active')
         let pageNum = +e.innerHTML;

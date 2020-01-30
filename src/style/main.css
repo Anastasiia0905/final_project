@@ -783,6 +783,8 @@ audio.active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   color: #fff;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -791,7 +793,7 @@ audio.active {
 }
 
 .contact__wrap {
-  width: 50%;
+  width: 40%;
   margin: 5%;
   text-align: center;
 }
@@ -803,6 +805,7 @@ audio.active {
 .contact__info {
   padding-top: 20%;
   line-height: 34px;
+  font-size: 0.5em;
 }
 
 .contact__info a {
@@ -811,6 +814,15 @@ audio.active {
 
 .contact__map {
   width: 100%;
+}
+
+@media screen and (max-width: 728px) {
+  .contact__wrap {
+    width: 80%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .feedback-form {
@@ -832,6 +844,7 @@ audio.active {
   border: none;
   border-radius: 15px;
   padding: 5px 0px 5px 30px;
+  margin-bottom: 1.3em;
   outline: none;
   background-color: rgba(176, 139, 224, 0.3);
   width: 300px;
@@ -843,7 +856,9 @@ audio.active {
   background-color: transparent;
   border-radius: 0;
   border-bottom: 1px solid #b08be0;
+  resize: none;
   overflow: hidden;
+  line-height: 1em;
 }
 
 .feedback-form__item_submit {
@@ -873,7 +888,7 @@ audio.active {
 
 .feedback-form label::before, .feedback-form button::before {
   position: absolute;
-  top: 50%;
+  top: 40%;
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -886,19 +901,19 @@ audio.active {
 }
 
 .feedback-form label[for='name']::before {
-  background-image: url("/content/img/icon/user.svg");
+  background-image: url("/src/content/img/icon/user.svg");
 }
 
 .feedback-form label[for='email']::before {
-  background-image: url("/content/img/icon/envelope.svg");
+  background-image: url("/src/content/img/icon/envelope.svg");
 }
 
 .feedback-form label[for='phone']::before {
-  background-image: url("/content/img/icon/phone.svg");
+  background-image: url("/src/content/img/icon/phone.svg");
 }
 
 .feedback-form label[for='submit']::before {
-  background-image: url("/content/img/icon/start-up.svg");
+  background-image: url("/src/content/img/icon/start-up.svg");
 }
 
 .footer {
@@ -910,9 +925,11 @@ audio.active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .footer__nav a {
@@ -921,6 +938,7 @@ audio.active {
 
 .footer__social img {
   width: 1em;
+  padding: 5px;
   height: 1em;
 }
 
