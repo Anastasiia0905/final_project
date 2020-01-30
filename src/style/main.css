@@ -643,7 +643,7 @@
           align-items: center;
 }
 
-.sound__form {
+.search__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -657,12 +657,13 @@
   background-color: #f5f8fe;
 }
 
-.sound__form input, .sound__form select, .sound__form label {
+.search__form input, .search__form select, .search__form label {
   font-size: 0.7em;
   position: relative;
   min-width: 100px;
+  max-width: 300px;
   margin: 5px;
-  min-height: 30px;
+  min-height: 1em;
   padding: 5px;
   border: 1px solid #b08be0;
   border-radius: 5px;
@@ -670,25 +671,25 @@
   background-color: transparent;
 }
 
-.sound__form input {
+.search__form input {
   width: 90%;
 }
 
-.sound__form select, .sound__form label {
+.search__form select, .search__form label {
   width: 40%;
 }
 
-.sound__form input:focus, .sound__form input:hover,
-.sound__form select:focus, .sound__form select:hover {
+.search__form input:focus, .search__form input:hover,
+.search__form select:focus, .search__form select:hover {
   border: 2px solid #7532e0;
 }
 
-.sound__form input[type='checkbox'] {
+.search__form input[type='checkbox'] {
   display: none;
 }
 
-.sound__form label::after {
-  content: "select your favorite music";
+.search__form label::after {
+  content: "";
   position: absolute;
   text-align: center;
   width: 100%;
@@ -698,10 +699,22 @@
           transform: translateY(-50%);
 }
 
-.sound__form input[type='checkbox'].active ~ label {
+.search__form input[type='checkbox'].active ~ label {
   color: #fff;
   background-color: #7532e0;
   border: none;
+}
+
+.video__form input[type="text"] {
+  display: none;
+}
+
+.video__form label::after {
+  content: "sort by duration";
+}
+
+.sound__form label::after {
+  content: "select yout favorite misuc";
 }
 
 .sound__wrap {

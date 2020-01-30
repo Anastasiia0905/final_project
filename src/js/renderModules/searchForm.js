@@ -22,6 +22,7 @@ export const searchForm = (arr, formClass) => {
     filterForm.appendChild(checkForm);
     filterForm.appendChild(checkLabel);
 
+    filterForm.classList.add('search__form');
     filterForm.classList.add(formClass);
     return filterForm;
 }
